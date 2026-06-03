@@ -1,0 +1,15 @@
+"""Chart of Accounts (VIII.4 / WS2-01): roles -> accounting type -> normal side."""
+ROLE_TYPE = {
+    "OPERATOR_NOSTRO": "ASSET", "PARTNER_PREFUND": "ASSET",
+    "IN_TRANSIT_PAYOUT": "ASSET", "SUSPENSE_CLEARING": "ASSET",
+    "CUSTOMER_WALLET": "LIABILITY", "SAFEGUARDING_CLIENT_MONEY": "LIABILITY",
+    "UNAPPLIED_RECEIPTS": "LIABILITY",
+    "EQUITY": "EQUITY",
+    "FEE_INCOME": "INCOME", "FX_PNL": "INCOME",
+    "LIQUIDITY_COST": "EXPENSE", "PARTNER_PAYOUT_COST": "EXPENSE", "RAIL_FEES": "EXPENSE",
+}
+SEED_ROLES = list(ROLE_TYPE)
+DEBIT_NORMAL = {"ASSET", "EXPENSE"}
+
+def normal_side(acct_type: str) -> str:
+    return "DEBIT" if acct_type in DEBIT_NORMAL else "CREDIT"

@@ -1,0 +1,5 @@
+[project]
+name = "remit_core"
+version = "0.1.0"
+description = "Canonical foundations (WS1) for the KR-hub remittance platform"
+requires-python = ">=3.10"
