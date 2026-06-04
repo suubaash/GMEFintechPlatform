@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "remit-backend",
+      "runtimeExecutable": "C:\\Users\\GME\\.claude\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd",
+      "runtimeArgs": ["-q", "spring-boot:run"],
+      "port": 8080
+    }
+  ]
+}
