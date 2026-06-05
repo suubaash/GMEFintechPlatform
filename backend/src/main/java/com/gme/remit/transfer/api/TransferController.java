@@ -47,6 +47,7 @@ public class TransferController {
         return TransferResponse.from(t,
                 transferService.legsOf(id),
                 transferService.swiftOf(id),
-                ledger.journalForTransfer(id));
+                ledger.journalForTransfer(id),
+                ledger.postingsForTransfer(id));
     }
 }

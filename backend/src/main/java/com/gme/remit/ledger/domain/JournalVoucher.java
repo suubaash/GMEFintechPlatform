@@ -1,12 +1,10 @@
 package com.gme.remit.ledger.domain;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.annotations.Immutable;
 
 import java.time.LocalDate;
@@ -50,9 +48,9 @@ public class JournalVoucher {
     @Column(name = "posted_at", nullable = false)
     private OffsetDateTime postedAt;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "jv_id", nullable = false)
-    private List<Posting> postings = new ArrayList<>();
+    /** Built in memory by {@link #create}; persisted explicitly by the service (append-only, no cascade UPDATE). */
+    @Transient
+    private final List<Posting> postings = new ArrayList<>();
 
     protected JournalVoucher() {
     }
@@ -93,7 +91,7 @@ public class JournalVoucher {
         jv.valueDate = valueDate;
         jv.postedAt = OffsetDateTime.now();
         for (Line l : lines) {
-            jv.postings.add(Posting.of(l.accountCode(), l.direction(), l.amountMinor(), ccy,
+            jv.postings.add(Posting.of(jv.jvId, l.accountCode(), l.direction(), l.amountMinor(), ccy,
                     transferId, legId, valueDate, cleared));
         }
         return jv;

@@ -58,7 +58,14 @@ public class LedgerService {
         }
         LocalDate vd = valueDate != null ? valueDate : LocalDate.now();
         JournalVoucher jv = JournalVoucher.create(movementType, ccy, lines, transferId, legId, vd, cleared);
-        return jvs.save(jv);
+        jvs.save(jv);
+        postings.saveAll(jv.getPostings()); // append-only insert; each posting already carries its jv_id
+        return jv;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Posting> postingsForTransfer(UUID transferId) {
+        return postings.findByTransferIdOrderByJvId(transferId);
     }
 
     @Transactional(readOnly = true)

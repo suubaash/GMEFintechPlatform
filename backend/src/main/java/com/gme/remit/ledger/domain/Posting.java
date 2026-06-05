@@ -21,8 +21,8 @@ public class Posting {
     @Column(name = "posting_id")
     private UUID postingId;
 
-    /** Owning JV; populated by the JV's join column, read-only here for querying/ordering. */
-    @Column(name = "jv_id", insertable = false, updatable = false)
+    /** Owning JV; set at insert time so no follow-up UPDATE is needed (the ledger is append-only). */
+    @Column(name = "jv_id", nullable = false)
     private UUID jvId;
 
     @Column(name = "account_code", nullable = false)
@@ -53,10 +53,11 @@ public class Posting {
     protected Posting() {
     }
 
-    static Posting of(String accountCode, Direction direction, long amountMinor, String currency,
+    static Posting of(UUID jvId, String accountCode, Direction direction, long amountMinor, String currency,
                       UUID transferId, UUID legId, LocalDate valueDate, boolean cleared) {
         Posting p = new Posting();
         p.postingId = UUID.randomUUID();
+        p.jvId = jvId;
         p.accountCode = accountCode;
         p.direction = direction;
         p.amountMinor = amountMinor;

@@ -21,4 +21,6 @@ public interface PostingRepository extends JpaRepository<Posting, java.util.UUID
     @Query("select p from Posting p join JournalVoucher j on p.jvId = j.jvId "
             + "where p.accountCode = :code order by j.postedAt, p.postingId")
     List<Posting> statementFor(@Param("code") String code);
+
+    List<Posting> findByTransferIdOrderByJvId(java.util.UUID transferId);
 }
