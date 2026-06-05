@@ -102,4 +102,41 @@ button.link:hover { background: none; color: var(--ink); }
     margin: 0 auto 8px;
 }
 #done { text-align: center; }
-code { background: var(--bg); padding: 2px 6px; border-radius: 6px; font-size: 12px; }
+code { background: var(--bg); padding: 2px 6px; border-radius: 6px; font-size: 12px; word-break: break-all; }
+
+/* ---- Send money page ---- */
+body.wide { align-items: flex-start; }
+.card-wide { max-width: 560px; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.topbar .brand { margin-bottom: 0; }
+nav { font-size: 13px; color: var(--muted); }
+nav a { color: var(--muted); text-decoration: none; }
+nav a.active, nav a:hover { color: var(--brand); }
+
+select {
+    width: 100%; padding: 12px 14px; font-size: 15px; border: 1px solid var(--line);
+    border-radius: 10px; margin-bottom: 14px; background: #fff; outline: none;
+}
+select:focus { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(11, 95, 255, 0.12); }
+
+.quote-box { background: var(--bg); border-radius: 12px; padding: 16px 18px; margin-bottom: 18px; }
+.qrow { display: flex; justify-content: space-between; font-size: 14px; padding: 4px 0; color: var(--ink); }
+.qrow span:first-child { color: var(--muted); }
+.qrow.big { font-size: 18px; padding: 6px 0 10px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+.qrow.big strong { color: var(--brand); }
+
+h3 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); margin: 20px 0 8px; }
+
+table.mini { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.mini td, table.mini th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+table.mini th { color: var(--muted); font-weight: 600; }
+table.mini td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.tag { font-size: 11px; padding: 1px 7px; border-radius: 20px; background: #e6efff; color: var(--brand-dark); }
+.tag.ok { background: #e3f6ec; color: var(--ok); }
+.dr { color: #b5651d; } .cr { color: var(--ok); }
+
+pre.swift {
+    background: #0d1b2a; color: #d7e3f4; padding: 14px; border-radius: 10px;
+    font-size: 12px; line-height: 1.4; overflow-x: auto; white-space: pre-wrap; word-break: break-word;
+}

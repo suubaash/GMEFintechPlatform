@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>GME Remit — Send money</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+</head>
+<body class="wide">
+<div class="card card-wide">
+    <div class="topbar">
+        <div class="brand">GME<span>Remit</span></div>
+        <nav><a href="/index.html">Create account</a> · <a href="/send.html" class="active">Send money</a></nav>
+    </div>
+    <h1>Send money</h1>
+
+    <!-- Step 1: quote -->
+    <form id="quoteForm" class="step">
+        <label for="corridor">Corridor</label>
+        <select id="corridor"></select>
+
+        <label for="amount">You send (KRW)</label>
+        <input id="amount" type="text" inputmode="numeric" value="1000000"/>
+
+        <button type="submit" id="quoteBtn">Get quote</button>
+    </form>
+
+    <!-- Step 2: quote shown + recipient -->
+    <div id="quoteResult" class="step hidden">
+        <div class="quote-box">
+            <div class="qrow big"><span>They receive</span><strong id="qReceive"></strong></div>
+            <div class="qrow"><span>Rate (incl. margin)</span><span id="qRate"></span></div>
+            <div class="qrow"><span>Mid-market</span><span id="qMid"></span></div>
+            <div class="qrow"><span>Total fees</span><span id="qFees"></span></div>
+            <div class="qrow"><span>ETA</span><span id="qEta"></span></div>
+            <table class="mini" id="feeTable"></table>
+        </div>
+
+        <form id="transferForm">
+            <label>Sender name</label>
+            <input id="senderName" type="text" value="Maria Garcia"/>
+            <label>Recipient name</label>
+            <input id="recipientName" type="text" value="Ram Thapa"/>
+            <label>Recipient account</label>
+            <input id="recipientAccount" type="text" value="0211939494"/>
+            <button type="submit" id="sendBtn">Confirm &amp; send</button>
+            <button type="button" id="reQuoteBtn" class="link">&larr; Change amount</button>
+        </form>
+    </div>
+
+    <!-- Result -->
+    <div id="result" class="step hidden">
+        <div class="check">&#10003;</div>
+        <h2>Transfer <span id="rStatus"></span></h2>
+        <div class="qrow big"><span>Delivered</span><strong id="rReceive"></strong></div>
+        <p class="hint">Transfer ID: <code id="rId"></code></p>
+
+        <h3>Legs</h3>
+        <table class="mini" id="legTable"></table>
+
+        <h3>Double-entry journal</h3>
+        <table class="mini" id="journalTable"></table>
+
+        <h3>SWIFT MT103</h3>
+        <pre id="swiftBox" class="swift"></pre>
+
+        <button type="button" id="againBtn">Send another</button>
+    </div>
+
+    <div id="error" class="error hidden"></div>
+</div>
+<script src="/js/send.js"></script>
+</body>
+</html>
